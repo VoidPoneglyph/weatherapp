@@ -1,0 +1,1 @@
+A basic weather app that shows the weather for a city and gives a five-day forecast. It can also check the user's IP and give the weather details of the city they live in without typing the name of the city. The API used here is WeatherAPI and the IDE used is VSCode.
