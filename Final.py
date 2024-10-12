@@ -2,8 +2,8 @@ import requests
 from tkinter import messagebox
 import tkinter as tk
 
-def get_weather_and_forecast(city_name,unit):
-    api_key = 'fe5ece531c06400aa58112348240910'  
+def get_weather_and_forecast(city_name,unit): #function to extract data from the API. Returns both the forecast weather data and the current data
+    api_key = 'api_key'  
     base_url = "http://api.weatherapi.com/v1/forecast.json"
     params = {
         'key': api_key,
@@ -81,7 +81,7 @@ def get_weather_and_forecast(city_name,unit):
     else:
         return None
 
-def show_weather_and_forecast():
+def show_weather_and_forecast(): # function for use in GUI, gets the user-input variables and pops it onto the above function, then returns the result.
     city = city_entry.get()
     unit = temp_var.get()
     
@@ -94,12 +94,12 @@ def show_weather_and_forecast():
     else:
         messagebox.showwarning("Input Error", "Please enter a city name.")
 
-def more_info():
-    with open('D:\documents\OneDrive\Desktop\weather\Info.txt','r') as file:
+def more_info(): # the info button, gets the text from the contents of PM Accelerator's LinkedIn and fills on the info message box.
+    with open('Info.txt','r') as file:
         content = file.read()
-        messagebox.showinfo("Info", content)
+        messagebox.showinfo("D:\documents\OneDrive\Desktop\weatherapp\Info", content)
 
-def get_location():
+def get_location(): # For the personalized location weather feature. Core function that gets the user's location.
     
     try:
         location_response = requests.get("https://ipinfo.io")
@@ -114,7 +114,7 @@ def get_location():
         messagebox.showerror("Error", f"Error getting location: {e}")
         return None
 
-def get_weather_for_current_location():
+def get_weather_for_current_location(): # uses a combination of the above location retreival function and the weather extraction function to show user city weather on the GUI.
     unit = temp_var.get()
     user_city = get_location()
     if user_city:
@@ -125,7 +125,7 @@ def get_weather_for_current_location():
             messagebox.showerror("Error", "Either the city you've entered is not a valid city or the weather info for that city cannot be shown at this time")
 
 
-
+# front end stuff. GUI framework starts here. The layout is configured here.
 root = tk.Tk()
 root.title("Weather Forecast App")
 label_frame = tk.Frame(root)
